@@ -1,17 +1,129 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
     <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GN_Gestione.CercaCliente">
-       <StackLayout>  
+      <StackLayout>  
         <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>  
-        <ListView x:Name="SearchList"
-                  ItemsSource="{Binding HeadersCollection">  
-            <ListView.ItemTemplate>  
-                <DataTemplate>  
-                    <TextCell Text="{Binding Name}" Detail="{Binding Num}">   
-                          
-                    </TextCell>  
-                </DataTemplate>  
-            </ListView.ItemTemplate>  
-        </ListView>  
-          
-    </StackLayout>  
+        <Grid>
+             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="80" />                           
+             </Grid.RowDefinitions>
+
+             <ListView x:Name="HeadersView"
+                       Grid.Row="1"
+                       ItemsSource="{Binding HeadersCollection}"
+                       HasUnevenRows="True">
+                 <ListView.ItemTemplate>
+                     <DataTemplate>
+                         <ViewCell IsEnabled="False">
+                             <Grid Padding="10">
+                               
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                   
+                                    <Label Grid.Column="1"
+                                           Text="{Binding [0]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="2"
+                                           Text="{Binding [1]}" FontSize="28"  
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="3"
+                                           Text="{Binding [2]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="4"
+                                           Text="{Binding [3]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="5"
+                                           Text="{Binding [4]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="6"
+                                          Text="{Binding [5]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="7"/>
+                             </Grid>     
+                         </ViewCell>
+                     </DataTemplate>
+                 </ListView.ItemTemplate>
+             </ListView>
+
+
+             <ListView x:Name="ClientiView"
+                       Grid.Row="2"
+                       ItemsSource="{Binding ClientiCollection}"
+                       HasUnevenRows="True">
+           
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                       
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Cl_Ret_CODE}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Cl_Ret_Name}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="3"
+                                           Text="{Binding Cl_Ret_Nickname}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="4"
+                                           Text="{Binding Cl_Ret_Act}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="5"
+                                           Text="{Binding Cl_Ret_Tot}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="6"
+                                           Text="{Binding Cl_Ret_Comment}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="End"/>
+                               
+
+                                    <Button x:Name="Modifica Cliente"
+                                            Text="Modifica"
+                                            FontSize="28"
+                                            Clicked="Button_Clicked"
+                                            CommandParameter="{Binding .}"
+                                            Grid.Column="7"
+                                            BackgroundColor="Orange"
+                                            TextColor="White"
+                                            />
+                               
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+              </ListView>
+            </Grid>
+          </StackLayout> 
     </ContentPage>

@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Entities;
-
+using DataLayerCSV;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+
+
 
 namespace GN_Gestione
 {
     public partial class CercaCliente : ContentPage
+
     {
+        //public IList<Cliente_Retail> IPrintList { get; private set; }
         public ObservableCollection<Cliente_Retail> ClientiCollection { get; set; }
         List<Cliente_Retail> PrintList = new List<Cliente_Retail>();
 
@@ -16,31 +23,34 @@ namespace GN_Gestione
         public ObservableCollection<List<string>> HeadersCollection = new ObservableCollection<List<string>>();
         List<string> PrintHeaders = new List<string>();
 
+        List<Cliente_Retail> tempdata = new List<Cliente_Retail>();
+
+
+
         public CercaCliente()
         {
-
-
             InitializeComponent();
+         
 
             PrintHeaders = GetHeaders();
+
             HeadersCollection.Clear();
-            List<string> peeb = new List<string>();
+            List<string> ercazzo = new List<string>();
 
 
             foreach (string str in PrintHeaders)
             {
-
-                peeb.Add(str);
-
+                ercazzo.Add(str);
             }
-            HeadersCollection.Add(peeb);
+
+            HeadersCollection.Add(ercazzo);
 
 
             HeadersView.ItemsSource = HeadersCollection;
 
 
             PrintList = GetLista();
-            int z = PrintList.Count();
+            int z = PrintList.Count;
 
             ObservableCollection<Cliente_Retail> ClientiCollection = new ObservableCollection<Cliente_Retail>();
             ClientiCollection.Clear();
@@ -63,18 +73,6 @@ namespace GN_Gestione
         }
 
 
-        /*   private async void Button_Clicked(object sender, EventArgs e, SelectedItemChangedEventArgs obj)
-           {
-
-               var selectedCustomer = obj.SelectedItem as Cliente_Retail;
-               int index = selectedCustomer.Cl_Ret_CODE;
-               //await Navigation.PushAsync(new Page2(selectedInstructor.Id));
-               await Navigation.PushAsync(new ModificaCliente(index));
-
-
-
-           } */
-
         private async void Button_Clicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -87,19 +85,40 @@ namespace GN_Gestione
 
         }
 
-
-
-
-
-        /*protected override void OnAppearing()
+       private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            base.OnAppearing();
+            PrintList = GetLista();
+            int z = PrintList.Count;
 
-            
-           
-        } */
+            ObservableCollection<Cliente_Retail> ClientiCollection = new ObservableCollection<Cliente_Retail>();
+            ClientiCollection.Clear();
 
+            if (z != 0)
+            {
+                foreach (Cliente_Retail cliente in PrintList)
+                {
+                    ClientiCollection.Add(cliente);
+                }
+            }
 
+            else
+            {
+                ClientiCollection.Add(new Cliente_Retail { Cl_Ret_Name = "Lista vuota" });
+            }
+
+            ClientiView.ItemsSource = ClientiCollection;
+            //thats all you need to make a search  
+
+            if (string.IsNullOrEmpty(e.NewTextValue))
+            {
+                ClientiView.ItemsSource = ClientiCollection;
+            }
+
+            else
+            {
+                ClientiView.ItemsSource = ClientiCollection.Where(x => x.Cl_Ret_Name.StartsWith(e.NewTextValue));
+            }
+        }
 
         public List<string> GetHeaders()
         {
@@ -112,14 +131,5 @@ namespace GN_Gestione
             ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
             return clienteRetailCSVDataLayer.GetAllRetail();
         }
-
-
-
-
-
-
-
-
-
     }
 }
