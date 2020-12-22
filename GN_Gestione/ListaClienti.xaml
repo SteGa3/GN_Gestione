@@ -1,75 +1,134 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-     <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:local="clr-namespace:GN_Gestione"
-                     mc:Ignorable="d"
-                     x:Class="GN_Gestione.ListaClienti">
+         <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:local="clr-namespace:GN_Gestione"
+                         mc:Ignorable="d"
+                         x:Class="GN_Gestione.ListaClienti">
+           <Grid>
+             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="80" />                           
+             </Grid.RowDefinitions>
 
-         <ListView x:Name="ClientiView"
-                   ItemsSource="{Binding ClientiCollection}"
-                   HasUnevenRows="True">
+             <ListView x:Name="HeadersView"
+                       Grid.Row="1"
+                       ItemsSource="{Binding HeadersCollection}"
+                       HasUnevenRows="True">
+                 <ListView.ItemTemplate>
+                     <DataTemplate>
+                         <ViewCell IsEnabled="False">
+                             <Grid Padding="10">
+                               
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                   
+                                    <Label Grid.Column="1"
+                                           Text="{Binding [0]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="2"
+                                           Text="{Binding [1]}" FontSize="28"  
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="3"
+                                           Text="{Binding [2]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="4"
+                                           Text="{Binding [3]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="5"
+                                           Text="{Binding [4]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="6"
+                                          Text="{Binding [5]}" FontSize="28"
+                                           FontAttributes="Bold" />
+
+                                    <Label Grid.Column="7"/>
+                             </Grid>     
+                         </ViewCell>
+                     </DataTemplate>
+                 </ListView.ItemTemplate>
+             </ListView>
+
+
+             <ListView x:Name="ClientiView"
+                       Grid.Row="2"
+                       ItemsSource="{Binding ClientiCollection}"
+                       HasUnevenRows="True">
            
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                       
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="1"
-                                       Text="{Binding Cl_Ret_CODE}" FontSize="28"
-                                       IsVisible="{Binding IsDisplay}"
-                                       FontAttributes="Bold" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Cl_Ret_CODE}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
 
-                                <Label Grid.Column="2"
-                                       Text="{Binding Cl_Ret_Name}" FontSize="28"
-                                       IsVisible="{Binding IsDisplay}"
-                                       FontAttributes="Bold" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Cl_Ret_Name}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
 
-                                <Label Grid.Column="3"
-                                       Text="{Binding Cl_Ret_Nickname}" FontSize="28"
-                                       IsVisible="{Binding IsDisplay}"
-                                       FontAttributes="Bold" />
+                                    <Label Grid.Column="3"
+                                           Text="{Binding Cl_Ret_Nickname}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
 
-                                <Label Grid.Column="4"
-                                       Text="{Binding Cl_Ret_Act}" FontSize="28"
-                                       FontAttributes="Bold" />
+                                    <Label Grid.Column="4"
+                                           Text="{Binding Cl_Ret_Act}" FontSize="28"
+                                           FontAttributes="Bold" />
 
-                                <Label Grid.Column="5"
-                                       Text="{Binding Cl_Ret_Tot}" FontSize="28"
-                                       IsVisible="{Binding IsDisplay}"
-                                       FontAttributes="Bold" />
+                                    <Label Grid.Column="5"
+                                           Text="{Binding Cl_Ret_Tot}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold" />
 
-                                <Label Grid.Column="6"
-                                       Text="{Binding Cl_Ret_Comment}" FontSize="28"
-                                       IsVisible="{Binding IsDisplay}"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="End"/>
+                                    <Label Grid.Column="6"
+                                           Text="{Binding Cl_Ret_Comment}" FontSize="28"
+                                           IsVisible="{Binding IsDisplay}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="End"/>
                                
 
-                                <Button x:Name="Modifica Cliente"
-                                        Text="Modifica"
-                                        FontSize="28"
-                                        Clicked="Button_Clicked"
-                                        CommandParameter="{Binding .}"
-                                        Grid.Column="7"
-                                        BackgroundColor="Orange"
-                                        TextColor="White"
-                                        />
+                                    <Button x:Name="Modifica Cliente"
+                                            Text="Modifica"
+                                            FontSize="28"
+                                            Clicked="Button_Clicked"
+                                            CommandParameter="{Binding .}"
+                                            Grid.Column="7"
+                                            BackgroundColor="Orange"
+                                            TextColor="White"
+                                            />
                                
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-          </ListView>
-      </ContentPage>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+              </ListView>
+            </Grid>
+          </ContentPage>
 
 

@@ -29,7 +29,8 @@ namespace GN_Gestione
         public ObservableCollection<Cliente_Retail> ClientiCollection { get; set; }
         List<Cliente_Retail> PrintList = new List<Cliente_Retail>();
 
-        public ObservableCollection<string> HeadersCollection = new ObservableCollection<string>();
+
+        public ObservableCollection<List<string>> HeadersCollection = new ObservableCollection <List<string>>();
         List<string> PrintHeaders = new List<string>();
        
         public ListaClienti()
@@ -39,15 +40,20 @@ namespace GN_Gestione
             InitializeComponent();
 
             PrintHeaders = GetHeaders();
-            ObservableCollection<string> HeadersCollection = new ObservableCollection<string>();
             HeadersCollection.Clear();
-            int c = PrintHeaders.Count();
+            List<string> peeb = new List<string>();
+
+
             foreach (string str in PrintHeaders)
             {
-                HeadersCollection.Add(str);
+                
+                peeb.Add(str);
+                
             }
-
-            //HeadersView.Itemsource = HeadersCollection;
+            HeadersCollection.Add(peeb);
+            
+            
+            HeadersView.ItemsSource = HeadersCollection;
 
 
             PrintList = GetLista();

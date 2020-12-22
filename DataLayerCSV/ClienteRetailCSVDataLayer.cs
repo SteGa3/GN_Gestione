@@ -72,9 +72,9 @@
            
         
 
-            public List<string> GetAllHeaders()
+            public List<String> GetAllHeaders()
             {
-                List<string> headers = new List<string>();
+                
 
                 //Read resource's csv file
                 var assembly = Assembly.GetExecutingAssembly();
@@ -83,20 +83,15 @@
 
                 using (StreamReader reader = new StreamReader(stream))
                 {
-                      //Read lines of the stream
-                      string line = reader.ReadLine();
-                      string[] values = line.Split(";");
-                      var headersNumber = values.Count();
-                        
-
-
-                      Cliente_Retail SingleRetail = new Cliente_Retail();
-                      for (int i = 0; i == headersNumber; i++ )
-                      {
-
-                          headers[i] = values[i];
-                        
-                      }
+                    //Read lines of the stream
+                    string line = reader.ReadLine();
+                    string[] values = line.Split(";");
+                    List<string> headers = new List<string>();
+                    foreach (string str in values)
+                    {
+                        headers.Add(str);
+                    }
+            
                     return headers;
                 }
            
