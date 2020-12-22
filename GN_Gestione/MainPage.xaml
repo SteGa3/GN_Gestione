@@ -26,7 +26,18 @@
                     <RowDefinition Height="Auto"/>                
                 </Grid.RowDefinitions> -->
                   
-                   <Button Text="Lista Clienti"
+            <!--<Button Text="Cerca Cliente"
+                            x:Name="CercaCliente"
+                            Clicked="GoToSearchCustomer"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                           
+                            BackgroundColor="Orange"
+                            TextColor="White"
+                            HeightRequest="50"
+                            WidthRequest="120"/> --> 
+                    <Button Text="Lista Clienti"
                             x:Name="ListaClienti"
                             Clicked="GoToListAll"
                             FontSize="25"

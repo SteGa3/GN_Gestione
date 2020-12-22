@@ -35,5 +35,11 @@ namespace GN_Gestione
             await Navigation.PushAsync(new Inserisci_Cliente());
 
         }
+
+        /*private async void GoToSearchCustomer(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CercaCliente());
+
+        } */
     }
 }

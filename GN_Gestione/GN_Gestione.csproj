@@ -19,6 +19,12 @@
     <None Remove="ListaClienti.csv" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Remove="CercaCliente.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="ListaClienti.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="CercaCliente.xaml.cs" />
   </ItemGroup>
 </Project>
