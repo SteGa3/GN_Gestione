@@ -19,12 +19,11 @@
     <None Remove="ListaClienti.csv" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="CercaCliente.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ListaClienti.csv" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="CercaCliente.xaml.cs" />
+    <Compile Update="CercaCliente.xaml.cs">
+      <DependentUpon>CercaCliente.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

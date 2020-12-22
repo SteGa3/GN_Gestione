@@ -36,10 +36,10 @@ namespace GN_Gestione
 
         }
 
-        /*private async void GoToSearchCustomer(object sender, EventArgs e)
+        private async void GoToSearchCustomer(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CercaCliente());
 
-        } */
+        }
     }
 }
