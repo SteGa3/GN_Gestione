@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:GN_Gestione"
+                 mc:Ignorable="d"
+                 x:Class="GN_Gestione.MainPage">
+
+
+
+        <StackLayout Padding="25">
+            <!-- Place new controls here -->
+            
+    <Label Text="GN GESTIONE Beta" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Header" />
+
+              <!-- <Grid HorizontalOptions="FillAndExpand">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                   
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>                
+                </Grid.RowDefinitions> -->
+                  
+                   <Button Text="Lista Clienti"
+                            x:Name="ListaClienti"
+                            Clicked="GoToListAll"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                           
+                            BackgroundColor="Orange"
+                            TextColor="White"
+                            HeightRequest="50"
+                            WidthRequest="120"/>
+
+
+                    <Button Text="Aggiungi Cliente"
+                            x:Name="AggiungiCliente"
+                            Clicked="GoToAddRetailCustomer"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                           
+                            BackgroundColor="Orange"
+                            TextColor="White"
+                            HeightRequest="50"
+                            WidthRequest="120"/>  
+                          
+                  
+                    
+
+                    
+            <!-- </Grid> -->
+
+
+
+            
+        </StackLayout>
+    </ContentPage>
