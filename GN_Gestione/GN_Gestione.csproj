@@ -16,12 +16,6 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ListaClienti.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ListaClienti.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="CercaCliente.xaml.cs">
       <DependentUpon>CercaCliente.xaml</DependentUpon>
     </Compile>

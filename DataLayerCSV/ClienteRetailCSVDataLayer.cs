@@ -1,6 +1,7 @@
 ﻿    using System;
     using Entities;
     using DatalayerCSV;
+    using CsvHelper;
     using System.IO;
     using System.Collections.Generic;
     using System.Text;
@@ -8,6 +9,7 @@
     using System.Reflection;
     using System.Security;
     using System.Linq;
+using System.Globalization;
 
 
     [assembly: SecurityRules(SecurityRuleSet.Level2)]
@@ -19,7 +21,6 @@
         {
             public List<Cliente_Retail> GetAllRetail()
             {
-
                 List<Cliente_Retail> All = new List<Cliente_Retail>();
 
                 //Read resource's csv file
@@ -70,8 +71,6 @@
                     return All;
             }
            
-        
-
             public List<String> GetAllHeaders()
             {
                 
@@ -100,24 +99,38 @@
 
             public void InsRetailCSV(Cliente_Retail cliente)
             {
+                List<Cliente_Retail> ListToSort = GetAllRetail();
+                ListToSort.Add(cliente);
+                List<Cliente_Retail> SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
+                int nElementi = SortedList.Count;
 
-                /** List<Cliente_Retail> clienteList = new List<Cliente_Retail>();
-                 clienteList.Add(cliente);
-                 //using (var stream = File.OpenWrite("/Users/damzSSD/Projects/ListaClienti.csv")) ;
-                 //using (var reader = new StreamReader("/Users/damzSSD/Projects / ListaClienti.csv"), Encoding.UTF8);
-                 using (var stream = File.OpenWrite("Utenti/damzSSD/Projects/GN_Gestione/ListaClienti.csv"))
-                 {
+                var assembly = Assembly.GetExecutingAssembly();
+                var directory = Directory.GetCurrentDirectory();
+            
+                var path = "/Users/damzSSD/Projects/GN_Gestione/DataLayerCSV/ListaClienti.csv";
+           
+                using (StreamWriter writer = new StreamWriter(path))
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteRecords(SortedList);
+                }
 
-                     using (var writer = new StreamWriter(stream))
-                     {
-                     }
-                 }
+            /**
+            using (var stream = File.OpenWrite("/Users/damzSSD/Projects/ListaClienti.csv")) ;
+            using (var reader = new StreamReader("/Users/damzSSD/Projects / ListaClienti.csv"), Encoding.UTF8);
+            using (var stream = File.OpenWrite("Utenti/damzSSD/Projects/GN_Gestione/ListaClienti.csv"))
+            {
 
-
-
-                   **/
+                using (var writer = new StreamWriter(stream))
+                {
+                }
             }
 
-       
+
+
+              **/
         }
+
+
+    }
     }
