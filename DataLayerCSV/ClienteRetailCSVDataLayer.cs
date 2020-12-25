@@ -4,11 +4,15 @@
     using CsvHelper;
     using System.IO;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Text;
     using System.Data;
     using System.Reflection;
     using System.Security;
     using System.Linq;
+   
+    using PCLStorage;
+
 using System.Globalization;
 
 
@@ -19,17 +23,19 @@ using System.Globalization;
     {
         public class ClienteRetailCSVDataLayer : DatalayerCSVBase, IClienteRetailCSVDatalayer
         {
+            
             public List<Cliente_Retail> GetAllRetail()
             {
                 List<Cliente_Retail> All = new List<Cliente_Retail>();
 
+                
                 //Read resource's csv file
                 var assembly = Assembly.GetExecutingAssembly();
                 var resourceName = "ListaClienti.csv";
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 
 
-           
+                //Populating List with Customers
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     bool first = false;
@@ -103,17 +109,19 @@ using System.Globalization;
                 ListToSort.Add(cliente);
                 List<Cliente_Retail> SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
                 int nElementi = SortedList.Count;
+                
 
-                var assembly = Assembly.GetExecutingAssembly();
-                var directory = Directory.GetCurrentDirectory();
-            
-                var path = "/Users/damzSSD/Projects/GN_Gestione/DataLayerCSV/ListaClienti.csv";
-           
+
+               /* IFolder folder = FileSystem.Current.LocalStorage;
+
+                IFile file = folder.GetFileAsync(folder + "ListaClienti.csv");
+
+                string path = file.Path;
                 using (StreamWriter writer = new StreamWriter(path))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
                     csv.WriteRecords(SortedList);
-                }
+                }*/
 
             /**
             using (var stream = File.OpenWrite("/Users/damzSSD/Projects/ListaClienti.csv")) ;

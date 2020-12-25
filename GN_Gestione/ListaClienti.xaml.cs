@@ -43,23 +43,24 @@ namespace GN_Gestione
             
             InitializeComponent();
 
+            //Get Headers da CSV
             PrintHeaders = GetHeaders();
 
             HeadersCollection.Clear();
-            List<string> ercazzo = new List<string>();
+            List<string> HeadersList = new List<string>();
 
 
             foreach (string str in PrintHeaders)
             {
-                ercazzo.Add(str);
+                HeadersList.Add(str);
             }
 
-            HeadersCollection.Add(ercazzo);
+            HeadersCollection.Add(HeadersList);
             
             
             HeadersView.ItemsSource = HeadersCollection;
 
-
+            //Get Lista Clienti da CSV
             PrintList = GetLista();
             int z = PrintList.Count();
          

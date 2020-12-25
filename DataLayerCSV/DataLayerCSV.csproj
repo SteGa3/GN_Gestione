@@ -9,7 +9,9 @@
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.49.0.2072" />
-    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
+    <PackageReference Include="MvvmCross" Version="7.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />

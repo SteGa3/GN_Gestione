@@ -10,7 +10,8 @@
 
 
 
-        <StackLayout Padding="25">
+        <StackLayout Padding="25"
+                     x:Name="Layout">
             <!-- Place new controls here -->
             
     <Label Text="GN GESTIONE Beta" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Header" />
@@ -37,6 +38,7 @@
                             TextColor="White"
                             HeightRequest="50"
                             WidthRequest="120"/>  
+
                     <Button Text="Lista Clienti"
                             x:Name="ListaClienti"
                             Clicked="GoToListAll"
@@ -60,7 +62,18 @@
                             BackgroundColor="Orange"
                             TextColor="White"
                             HeightRequest="50"
-                            WidthRequest="120"/>  
+                            WidthRequest="120"/>
+
+                    <Label  x:Name="StatoFile"
+                            Margin="80"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            BackgroundColor="White"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Black"
+                            HeightRequest="50"
+                            WidthRequest="120"/>
                           
                   
                     
