@@ -44,6 +44,7 @@ namespace GN_Gestione
 
                 MyProperty = "non esiste."; 
                 Button button = new Button { Text = "Crea File" };
+               
                 Layout.Children.Add(button);
                 /*
 
@@ -91,7 +92,7 @@ namespace GN_Gestione
         }
 
 
-        //Link to pages
+        //Button clicks
         private async void GoToListAll(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ListaClienti());

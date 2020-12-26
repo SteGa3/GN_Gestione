@@ -15,7 +15,7 @@ namespace DataLayerCSV
         {
             
             IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
-            string fileName = rootFolder.Path.ToString() + _filename;
+            string fileName = rootFolder.Path.ToString() +"/" + _filename;
             bool existResult = File.Exists(fileName);
            
             //ExistenceCheckResult exist = await rootFolder.CheckExistsAsync(_filename);
@@ -97,6 +97,19 @@ namespace DataLayerCSV
 
             // return the contents of the file
             return result;
+        }
+
+        public bool WriteTextFile (string _filename, Stream _stream)
+        {
+            bool check=false;
+            IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
+            string folder = rootFolder.ToString();
+            string fileName = rootFolder.Path.ToString() + "/" + _filename;
+
+            File.Create(fileName);
+            check = FileExists(_filename);
+
+            return check;
         }
 
 
