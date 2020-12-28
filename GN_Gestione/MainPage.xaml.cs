@@ -37,12 +37,13 @@ namespace GN_Gestione
             isExt = Existance(FileName);
             if (isExt == true)
             {
-                MyProperty = "esiste";
+                MyProperty = "caricato correttamente";
             }
             else
             {
 
-                MyProperty = "non esiste."; 
+                MyProperty = "non esiste.";
+                
                 Button button = new Button { Text = "Crea File" };
                
                 Layout.Children.Add(button);

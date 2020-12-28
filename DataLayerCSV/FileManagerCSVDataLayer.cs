@@ -99,7 +99,7 @@ namespace DataLayerCSV
             return result;
         }
 
-        public bool WriteTextFile (string _filename, Stream _stream)
+        public bool WriteTextFile(string _filename)
         {
             bool check=false;
             IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
