@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataLayerCSV\DataLayerCSV.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\FileManager\FileManager.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="CercaCliente.xaml.cs">

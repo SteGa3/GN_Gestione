@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
 using DataLayerCSV;
+using FileManager;
 using PCLStorage;
 using System.Net;
 using System.Net.Http;
@@ -24,7 +25,7 @@ namespace GN_Gestione
     public partial class MainPage : ContentPage
     {
         public string FileName="ListaClienti.csv";
-        public DataLayerCSV.FileManagerCSVDataLayer DataManagement = new FileManagerCSVDataLayer();
+        public FileManager.DeviceIO DataManagement = new FileManager.DeviceIO();
         public string MyProperty = "not checked";
         StackLayout parent;
 
@@ -69,7 +70,7 @@ namespace GN_Gestione
 
         public bool Existance(string _filename)
         {
-            FileManagerCSVDataLayer g = new FileManagerCSVDataLayer();
+            FileManager.DeviceIO g = new FileManager.DeviceIO();
             var check = g.FileExists(_filename);
             return check;
         }

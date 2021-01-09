@@ -54,14 +54,14 @@ using System.Globalization;
                             SingleRetail.Cl_Ret_CODE = Convert.ToInt32(values[0]);
                             SingleRetail.Cl_Ret_Name = values[1];
                             SingleRetail.Cl_Ret_Nickname = values[2];
+                                                        
+                            if (values[3] == "") { SingleRetail.Cl_Ret_Act = 0; }
+                            else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[3]); }
 
-                            if (values[3] == "") {SingleRetail.Cl_Ret_Tot = 0;}
-                            else { SingleRetail.Cl_Ret_Tot = Int32.Parse(values[3]); }
+                            if (values[4] == "") { SingleRetail.Cl_Ret_Tot = 0; }
+                            else { SingleRetail.Cl_Ret_Tot = Convert.ToInt32(values[4]); }
 
-                            if (values[4] == "") { SingleRetail.Cl_Ret_Act = 0; }
-                            else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[4]); }
-
-                            SingleRetail.Cl_Ret_Comment = values[5];
+                        SingleRetail.Cl_Ret_Comment = values[5];
 
                             All.Add(SingleRetail);
                     }
