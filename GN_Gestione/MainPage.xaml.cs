@@ -35,7 +35,9 @@ namespace GN_Gestione
             InitializeComponent();
             bool isExt = true;
 
-            isExt = Existance(FileName);
+            isExt = DataManagement.FileExists(FileName);
+
+            //isExt = Existance(FileName);
             if (isExt == true)
             {
                 MyProperty = "caricato correttamente";
@@ -68,13 +70,7 @@ namespace GN_Gestione
 
         //File Manager DataLayer
 
-        public bool Existance(string _filename)
-        {
-            FileManager.DeviceIO g = new FileManager.DeviceIO();
-            var check = g.FileExists(_filename);
-            return check;
-        }
-
+     
         public void Addbutton(object sender, EventArgs e)
         {
             // Define a new button
