@@ -10,6 +10,6 @@ namespace FileManager
         bool FileExists(string _filename);
         Task<IFile> ReadTextFileAsync(string _filename);
         Task<string> WriteTextFileAsync(string _filename, string _content);
-        bool WriteTextFile(string _filename);
+        void WriteTextFile(string _filename);
     }
 }

@@ -22,12 +22,13 @@ namespace GN_Gestione
 
 
 
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         public string FileName="ListaClienti.csv";
-        public FileManager.DeviceIO DataManagement = new FileManager.DeviceIO();
-        public string MyProperty = "not checked";
-        StackLayout parent;
+        private FileManager.DeviceIO DataManagement = new FileManager.DeviceIO();
+        private string MyProperty = "not checked";
+        private ICommand createFileCommand;
+        
 
 
         public MainPage()
@@ -46,10 +47,34 @@ namespace GN_Gestione
             {
 
                 MyProperty = "non esiste.";
-                
-                Button button = new Button { Text = "Crea File" };
-               
-                Layout.Children.Add(button);
+
+                ICommand createFileCommand;
+                Button buttonCreate = new Button { Text = "Crea File" };
+                createFileCommand = new Command(createCommand);
+                buttonCreate.Command = createFileCommand;
+                buttonCreate.BindingContext = createFileCommand;
+                buttonCreate.Clicked += Create_Clicked;
+                Layout.Children.Add(buttonCreate);
+
+                ICommand deleteFileCommand;
+                Button buttonDelete = new Button { Text = "Cancella File" };
+                deleteFileCommand = new Command(deleteCommand);
+                buttonDelete.BindingContext = deleteFileCommand;
+                buttonDelete.Clicked += Delete_Clicked;
+                Layout.Children.Add(buttonDelete);
+
+
+
+
+
+
+
+                bool checkCreation = DataManagement.FileExists(FileName);
+                if (checkCreation == true)
+                {
+                    MyProperty = "File Creato.";
+                }
+                else { MyProperty = "Errore, File non Creato!"; }
                 /*
 
                 // Creating a binding
@@ -68,29 +93,44 @@ namespace GN_Gestione
 
         }
 
-        //File Manager DataLayer
-
-     
-        public void Addbutton(object sender, EventArgs e)
+        //Create new File -> Button
+        private void Create_Clicked(object sender, EventArgs e)
         {
-            // Define a new button
-            Button newButton = new Button { Text = "Crea File" };
-
-            // Creating a binding
-            newButton.SetBinding(Button.CommandProperty, new Binding("ViewModelProperty"));
-
-            // Set the binding context after SetBinding method calls for performance reasons
-            newButton.BindingContext = Layout;
-
-            // Set StackLayout in XAML to the class field
-            parent = Layout;
-
-            // Add the new button to the StackLayout
-            parent.Children.Add(newButton);
+            if (sender is Button button)
+            {
+                button.IsEnabled = false;
+               
+            }
         }
 
+        private void Delete_Clicked(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                button.IsEnabled = false;
+
+            }
+        }
+
+        //File Manager DataLayer
+        private void createCommand()
+        {
+            DataManagement.WriteTextFile(FileName);
+        }
+
+        private void deleteCommand()
+        {
+
+        }
 
         //Button clicks
+
+        /*void HandleClick(object sender, EventArgs e)
+        {
+            DataManagement.WriteTextFile(FileName);
+
+        }*/
+
         private async void GoToListAll(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ListaClienti());

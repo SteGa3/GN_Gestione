@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 using PCLStorage;
 
 namespace FileManager
@@ -25,6 +26,32 @@ namespace FileManager
             return existResult;
 
         }
+
+
+
+        public StreamReader FileRead(string _filename)
+        {
+            StreamReader streamReaded = null;
+            IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
+            string path = rootFolder.Path.ToString() + "/" + _filename;
+            bool existResult = File.Exists(path);
+            if (existResult)
+            {
+
+
+                var stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                var reader = new StreamReader(stream);
+
+                return reader;
+            }
+
+            else
+            {
+                return streamReaded;
+            }
+
+        }
+
 
         public async Task<IFile> ReadTextFileAsync(string _filename)
         {
@@ -64,7 +91,7 @@ namespace FileManager
         }
 
 
-        public bool WriteTextFile(string _filename)
+        public void WriteTextFile(string _filename)
         {
             bool check = false;
             IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
@@ -74,12 +101,14 @@ namespace FileManager
             File.Create(fileName);
             check = FileExists(_filename);
 
-            return check;
+            
         }
 
         public Task<string> WriteTextFileAsync(string _filename, string _content)
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }

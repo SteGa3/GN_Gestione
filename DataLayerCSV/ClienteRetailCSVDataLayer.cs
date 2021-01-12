@@ -1,6 +1,7 @@
 ﻿    using System;
     using Entities;
     using DatalayerCSV;
+    using FileManager;
     using CsvHelper;
     using System.IO;
     using System.Collections.Generic;
@@ -27,16 +28,17 @@ using System.Globalization;
             public List<Cliente_Retail> GetAllRetail()
             {
                 List<Cliente_Retail> All = new List<Cliente_Retail>();
-
+            FileManager.DeviceIO fileManager = new FileManager.DeviceIO();
+                
                 
                 //Read resource's csv file
-                var assembly = Assembly.GetExecutingAssembly();
+                //var assembly = Assembly.GetExecutingAssembly();
                 var resourceName = "ListaClienti.csv";
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                //using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 
 
                 //Populating List with Customers
-                using (StreamReader reader = new StreamReader(stream))
+                using (StreamReader reader = fileManager.FileRead(resourceName))
                 {
                     bool first = false;
             
@@ -51,7 +53,7 @@ using System.Globalization;
                     
                             Cliente_Retail SingleRetail = new Cliente_Retail();
 
-                            SingleRetail.Cl_Ret_CODE = Convert.ToInt32(values[0]);
+                            SingleRetail.Cl_Ret_CODE = int.Parse(values[0]);
                             SingleRetail.Cl_Ret_Name = values[1];
                             SingleRetail.Cl_Ret_Nickname = values[2];
                                                         
