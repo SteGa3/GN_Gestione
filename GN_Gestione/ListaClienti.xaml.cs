@@ -25,10 +25,6 @@ namespace GN_Gestione
 {
     public partial class ListaClienti : ContentPage
     {
-
-        
-        
-
         //public IList<Cliente_Retail> IPrintList { get; private set; }
         public ObservableCollection<Cliente_Retail> ClientiCollection { get; set; }
         List<Cliente_Retail> PrintList = new List<Cliente_Retail>();
@@ -56,9 +52,8 @@ namespace GN_Gestione
             }
 
             HeadersCollection.Add(HeadersList);
-            
-            
             HeadersView.ItemsSource = HeadersCollection;
+
 
             //Get Lista Clienti da CSV
             PrintList = GetLista();
@@ -102,12 +97,11 @@ namespace GN_Gestione
             Button button = (Button)sender;
             var customer = (Cliente_Retail)button.CommandParameter;
             if (customer == null) return;
+            await Navigation.PushAsync(new ModificaCliente(customer));
+        }
 
             
 
-            await Navigation.PushAsync(new ModificaCliente(customer));
-
-        }
 
 
 
@@ -123,19 +117,30 @@ namespace GN_Gestione
 
 
 
-        public List<string> GetHeaders()
+        private List<string> GetHeaders()
         {
             ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
             return clienteRetailCSVDataLayer.GetAllHeaders();
         }
 
-        public List<Cliente_Retail> GetLista()
+        private List<Cliente_Retail> GetLista()
         {
+           
             ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
             return clienteRetailCSVDataLayer.GetAllRetail();    
         }
 
-        
+        private List<Cliente_Retail> GetLista(int type)
+        {
+
+            ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
+            return clienteRetailCSVDataLayer.GetAllRetail();
+        }
+
+
+
+
+
 
 
 
