@@ -1,4 +1,5 @@
 ﻿using System;
+using Entities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,6 +7,11 @@ namespace GN_Gestione
 {
     public partial class App : Application
     {
+        private static AppSettings appSettings = new AppSettings();
+        //file path
+        //Check if file exists
+        //Write settings on object
+
         public App()
         {
             InitializeComponent();

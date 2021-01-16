@@ -78,9 +78,6 @@ namespace GN_Gestione
             Button button = (Button)sender;
             var customer = (Cliente_Retail)button.CommandParameter;
             if (customer == null) return;
-
-
-
             await Navigation.PushAsync(new ModificaCliente(customer));
 
         }

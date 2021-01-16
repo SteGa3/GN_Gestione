@@ -31,7 +31,7 @@ namespace GN_Gestione
             Entities.Cliente_Retail cliente_Retail = new Entities.Cliente_Retail();
             cliente_Retail.Cl_Ret_Name = nome.Text;
             cliente_Retail.Cl_Ret_Nickname = soprannome.Text;
-            cliente_Retail.Cl_Ret_CODE = Int32.Parse(codice.Text);
+            cliente_Retail.Cl_Ret_CODE = 0;
             cliente_Retail.Cl_Ret_Act = 0;
             cliente_Retail.Cl_Ret_Tot = 0;
             cliente_Retail.Cl_Ret_Comment = "";

@@ -115,7 +115,7 @@ namespace GN_Gestione
         //File Manager DataLayer
         private void createCommand()
         {
-            DataManagement.WriteTextFile(FileName);
+            DataManagement.CreateFile(FileName);
         }
 
         private void deleteCommand()
