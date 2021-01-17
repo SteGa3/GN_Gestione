@@ -75,8 +75,10 @@ namespace GN_Gestione
 
             if (attuale.Text == null) { cliente_Retail.Cl_Ret_Act = cl.Cl_Ret_Act; }
             else { cliente_Retail.Cl_Ret_Act = Convert.ToInt32(attuale.Text); }
-                                    
-            cliente_Retail.Cl_Ret_Tot = cl.Cl_Ret_Tot;
+
+            if (totale.Text == null) { cliente_Retail.Cl_Ret_Tot = cl.Cl_Ret_Tot; }
+            else { cliente_Retail.Cl_Ret_Tot = Convert.ToInt32(totale.Text); }
+
 
             if (commento.Text == null) { cliente_Retail.Cl_Ret_Comment = cl.Cl_Ret_Comment; }
             else { cliente_Retail.Cl_Ret_Comment = commento.Text; }
