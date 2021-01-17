@@ -1,12 +1,10 @@
 ﻿using System;
 using Entities;
 using DatalayerCSV;
-using FileManager;
 using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using PCLStorage;
 
 
 namespace DataLayerCSV
@@ -36,7 +34,7 @@ namespace DataLayerCSV
             
             using (reader)
             {
-                reader.ReadLine();
+                reader.ReadLine(); //skip headers
 
                 while (!reader.EndOfStream)
                 {
@@ -107,46 +105,62 @@ namespace DataLayerCSV
 
             string line;
             List<string> values = new List<string>();
-
+            Cliente_Retail ClToAdd = cliente;
 
             int checkInsLista;
-            Cliente_Retail ClToAdd = cliente;
+            
+            //Get headers and customers list
+            List<string> headersList = GetAllHeaders();
             List<Cliente_Retail> ListToSort = GetAllRetail();
+
+            //Insert headers in list to write 
+            var headersInsert = string.Join(";", headersList);
+            values.Add(headersInsert);
 
             //check available id
             ClToAdd.Cl_Ret_CODE = GetId(ListToSort);
+            ClToAdd.Cl_Ret_Comment = "empty";
 
             //add new customer with proper id
             ListToSort.Add(ClToAdd);
             List<Cliente_Retail> SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
+
 
             //check if inserted
             List<Cliente_Retail> results = SortedList.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
             if (results.Count == 0)
             {
                 checkInsLista = (int)InsResultsCodes.NotCreatedAfterIns;
+                return checkInsLista;
             }
-            else { checkInsLista = (int)InsResultsCodes.Created; }
+            else { checkInsLista = (int)InsResultsCodes.ListNewElementCreated; }
 
-            AppSettings appSettings = new AppSettings();
-            IFolder folder = appSettings.rootFolder;
 
             //Write on string List
+                
+
             foreach (Cliente_Retail c in SortedList)
             {
-                line =  Convert.ToString(c.Cl_Ret_CODE) + ";" +
-                        Convert.ToString(c.Cl_Ret_Name) + ";" +
-                        Convert.ToString(c.Cl_Ret_Nickname) + ";" +
-                        Convert.ToString(c.Cl_Ret_Tot) + ";" +
-                        Convert.ToString(c.Cl_Ret_Act) + ";" +
-                        Convert.ToString(c.Cl_Ret_Comment);
+                line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
+                       Convert.ToString(c.Cl_Ret_Name) + ";" +
+                       Convert.ToString(c.Cl_Ret_Nickname) + ";" +
+                       Convert.ToString(c.Cl_Ret_Tot) + ";" +
+                       Convert.ToString(c.Cl_Ret_Act) + ";" +
+                       Convert.ToString(c.Cl_Ret_Comment);
+                        //Convert.ToString(c.Cl_Ret_Comment);
 
                 values.Add(line);
             }
 
             String[] str = values.ToArray();
             FileManager.DeviceIO fileManager = new FileManager.DeviceIO();
-            fileManager.UpdateTextFile(resourceName,str);
+            var checkIO = fileManager.UpdateTextFile(resourceName,str);
+            if (checkIO == true)
+            {
+                checkInsLista = (int)InsResultsCodes.ElementAddedSaveOnFile;
+            }
+            else { checkInsLista = (int)InsResultsCodes.ElementNotAddedOnFile; }
+
 
             return checkInsLista;
         }
@@ -165,7 +179,12 @@ namespace DataLayerCSV
         {   
             ErrorIns = 0,
             NotCreatedAfterIns = 1,
-            Created = 2
+            ListNewElementCreated = 2,
+            ElementNotAddedOnFile = 3,
+            ElementAddedSaveOnFile = 4
+            
+
+
         } 
     }
 }

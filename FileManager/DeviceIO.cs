@@ -79,23 +79,32 @@ namespace FileManager
             IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
             string path = rootFolder.Path.ToString() + "/" + _filename;
             bool existResult = File.Exists(path);
+
             bool check;
+
             if (existResult)
             {
                 TextWriter tw = new StreamWriter(path);
-                foreach (string s in stringList)
-                {
-                    tw.WriteLine(s);
-                }
-                tw.Close();
-                check = true;
-            }
+                var lngt = stringList.Length;
 
-            else
-            {
-                check = false;
-                
+                if (stringList != null || lngt != 0)
+                {
+                    foreach (string s in stringList)
+                    {
+                        tw.WriteLine(s);
+                    }
+
+                    tw.Close();
+                    check = true;
+                }
+                else { check = false; }
+
             }
+            
+        
+            else { check = false; }
+
+            
             return check;
         }
 
