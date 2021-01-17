@@ -8,10 +8,7 @@ namespace FileManager
 {
     public class DeviceIO : IDeviceIO
     {
-        public DeviceIO()
-        {
-        }
-
+        
         public bool FileExists(string _filename)
         {
 
@@ -46,6 +43,21 @@ namespace FileManager
         }
 
 
+        public bool DeleteFile(string _filename)
+        {
+            bool check = FileExists(_filename);
+            if (!check)
+            {
+                IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
+                string fileName = rootFolder.Path.ToString() + "/" + _filename;
+                File.Delete(fileName);
+            }
+            else { check = false; }
+
+            return check;
+        }
+
+
         public StreamReader FileRead(string _filename)
         {
             StreamReader streamReaded = null;
@@ -69,8 +81,6 @@ namespace FileManager
             }
 
         }
-
-
 
 
         //Check type
@@ -107,52 +117,6 @@ namespace FileManager
             
             return check;
         }
-
-       
-       
-
-
-
-
-
-        /* public async Task<IFile> ReadTextFileAsync(string _filename)
-         {
-             // declare an empty variable to be filled later
-             IFile result = null;
-
-             // see if the file exists
-             try
-             {
-                 // get hold of the file system
-                 IFolder rootFolder = PCLStorage.FileSystem.Current.LocalStorage;
-
-                 var existCheck = FileExists(_filename);
-
-
-                 // create a folder, if one does not exist already
-                 //IFolder folder = await rootFolder.CreateFolderAsync("DailyBibleReading", CreationCollisionOption.OpenIfExists);
-
-
-                 // create a file, opening any existing file
-                 IFile file = await rootFolder.CreateFileAsync(_filename, CreationCollisionOption.OpenIfExists);
-             }
-
-
-
-             // populate the file with some text
-
-             // if the file doesn't exist
-             catch (Exception ex)
-             {
-                 // Output to debugger
-
-             }
-
-             // return the contents of the file
-             return result;
-         }
-        */
-
 
     }
 }

@@ -10,6 +10,7 @@ namespace FileManager
     {
         bool FileExists(string _filename);
         bool CreateFile(string _filename);
+        bool DeleteFile(string _filename);
         StreamReader FileRead(string _filename);
         bool UpdateTextFile(string _filename, string [] stringList);
     }

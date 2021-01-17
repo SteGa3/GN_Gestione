@@ -64,7 +64,6 @@ namespace DataLayerCSV
 
         } 
                 
-           
         public List<String> GetAllHeaders()
         {
             //Read resource's csv file
@@ -97,7 +96,6 @@ namespace DataLayerCSV
                 return headers;
             }
         }
-
 
         public int InsRetailCSV(Cliente_Retail cliente)
         {
@@ -165,6 +163,69 @@ namespace DataLayerCSV
             return checkInsLista;
         }
 
+        public int DeleteRetailCSV(Cliente_Retail cliente)
+        {
+            var resourceName = "ListaClienti.csv";
+
+            string line;
+            List<string> values = new List<string>();
+            Cliente_Retail ClToDel = cliente;
+
+            int checkInsLista;
+
+            //Get headers and customers list
+            List<string> headersList = GetAllHeaders();
+            List<Cliente_Retail> CustomersList = GetAllRetail();
+
+            //Insert headers in list to write 
+            var headersInsert = string.Join(";", headersList);
+            values.Add(headersInsert);
+
+
+
+
+            //delete customer from list
+           
+            var itemToRemove = CustomersList.Single(r => r.Cl_Ret_CODE ==cliente.Cl_Ret_CODE );
+
+            //check if inserted
+            List<Cliente_Retail> results = CustomersList.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+            if (results.Count > 0)
+            {
+                checkInsLista = (int)DelResultsCodes.ListElementNotDeleted;
+                return checkInsLista;
+            }
+            else { checkInsLista = (int)DelResultsCodes.ListElementDeleted; }
+
+
+            //Write on string List
+
+
+            foreach (Cliente_Retail c in CustomersList)
+            {
+                line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
+                       Convert.ToString(c.Cl_Ret_Name) + ";" +
+                       Convert.ToString(c.Cl_Ret_Nickname) + ";" +
+                       Convert.ToString(c.Cl_Ret_Tot) + ";" +
+                       Convert.ToString(c.Cl_Ret_Act) + ";" +
+                       Convert.ToString(c.Cl_Ret_Comment);
+                //Convert.ToString(c.Cl_Ret_Comment);
+
+                values.Add(line);
+            }
+
+            String[] str = values.ToArray();
+            FileManager.DeviceIO fileManager = new FileManager.DeviceIO();
+            var checkIO = fileManager.UpdateTextFile(resourceName, str);
+            if (checkIO == true)
+            {
+                checkInsLista = (int)DelResultsCodes.ElementDeletedOnFile;
+            }
+            else { checkInsLista = (int)DelResultsCodes.ElementNotDeletedOnFile; }
+
+
+            return checkInsLista;
+        }
 
         public int GetId(List<Cliente_Retail> ListaClienti)
         {
@@ -175,6 +236,16 @@ namespace DataLayerCSV
         }
 
 
+        enum DelResultsCodes
+        {
+            ElementNotFound= 0,
+            ListElementNotDeleted = 1,
+            ListElementDeleted = 2,
+            ElementNotDeletedOnFile = 3,
+            ElementDeletedOnFile = 4
+        }
+
+
         enum InsResultsCodes
         {   
             ErrorIns = 0,
@@ -182,9 +253,6 @@ namespace DataLayerCSV
             ListNewElementCreated = 2,
             ElementNotAddedOnFile = 3,
             ElementAddedSaveOnFile = 4
-            
-
-
         } 
     }
 }
