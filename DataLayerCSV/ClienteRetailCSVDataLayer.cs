@@ -103,34 +103,64 @@ namespace DataLayerCSV
 
             string line;
             List<string> values = new List<string>();
-            Cliente_Retail ClToAdd = cliente;
+            Cliente_Retail ClToAdd = new Cliente_Retail();
+
+            Cliente_Retail oldElement = new Cliente_Retail();
+            int idSave = 0;
 
             int checkInsLista;
             
             //Get headers and customers list
             List<string> headersList = GetAllHeaders();
             List<Cliente_Retail> ListToSort = GetAllRetail();
+            
+
 
             //Insert headers in list to write 
             var headersInsert = string.Join(";", headersList);
             values.Add(headersInsert);
 
-            //check available id
-            ClToAdd.Cl_Ret_CODE = GetId(ListToSort);
-            ClToAdd.Cl_Ret_Comment = "empty";
+            //check if element already exists
+            bool containsItem = ListToSort.Any(item => item.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+
+            List<Cliente_Retail> SortedList = new List<Cliente_Retail>();
+
+            if (!containsItem)
+            {
+                //check available id
+                ClToAdd = cliente;
+                ClToAdd.Cl_Ret_CODE = GetId(ListToSort);
+                idSave = ClToAdd.Cl_Ret_CODE;
+               
+            }
+
+            else
+            {
+                List<Cliente_Retail> check = ListToSort.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+                oldElement = check[0];
+                idSave = check[0].Cl_Ret_CODE;
+                var itemToRemove = ListToSort.Single(r => r.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+                ListToSort.Remove(itemToRemove);
+                ClToAdd.Cl_Ret_CODE = oldElement.Cl_Ret_CODE; //
+                ClToAdd.Cl_Ret_Name = cliente.Cl_Ret_Name;
+                ClToAdd.Cl_Ret_Nickname = cliente.Cl_Ret_Nickname;
+                ClToAdd.Cl_Ret_Tot = oldElement.Cl_Ret_Tot; //
+                ClToAdd.Cl_Ret_Act = cliente.Cl_Ret_Act;
+                ClToAdd.Cl_Ret_Comment = cliente.Cl_Ret_Comment;
+            }
 
             //add new customer with proper id
             ListToSort.Add(ClToAdd);
-            List<Cliente_Retail> SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
+            SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
 
-
-            //check if inserted
-            List<Cliente_Retail> results = SortedList.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+             //check if inserted in list
+            List<Cliente_Retail> results = SortedList.FindAll(x => x.Cl_Ret_CODE == idSave);
             if (results.Count == 0)
             {
                 checkInsLista = (int)InsResultsCodes.NotCreatedAfterIns;
                 return checkInsLista;
             }
+
             else { checkInsLista = (int)InsResultsCodes.ListNewElementCreated; }
 
 

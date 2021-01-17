@@ -26,20 +26,20 @@ namespace GN_Gestione
             ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
             clienteRetailCSVDataLayer.InsRetailCSV(cliente);
         }
-        private void GoToAggiungiCliente(object sender, EventArgs e)
+        private async void GoToAggiungiCliente(object sender, EventArgs e)
         {
-            Entities.Cliente_Retail cliente_Retail = new Entities.Cliente_Retail();
-            cliente_Retail.Cl_Ret_Name = nome.Text;
-            cliente_Retail.Cl_Ret_Nickname = soprannome.Text;
-            cliente_Retail.Cl_Ret_CODE = 0;
-            cliente_Retail.Cl_Ret_Act = 0;
-            cliente_Retail.Cl_Ret_Tot = 0;
-            cliente_Retail.Cl_Ret_Comment = "";
-            cliente_Retail.Cl_Ret_Surname = "";
+            Cliente_Retail cli = new Cliente_Retail();
+            cli.Cl_Ret_Name = nome.Text;
+            cli.Cl_Ret_Nickname = soprannome.Text;
+            cli.Cl_Ret_CODE = 0;
+            cli.Cl_Ret_Act = 0;
+            cli.Cl_Ret_Tot = 0;
+            cli.Cl_Ret_Comment = "";
+            
 
-            DataLayerCSV.ClienteRetailCSVDataLayer Cli_Send = new DataLayerCSV.ClienteRetailCSVDataLayer();
-            Cli_Send.InsRetailCSV(cliente_Retail);
-
+            
+            InserisciCliente(cli);
+            await Navigation.PushAsync(new MainPage());
 
 
         }
