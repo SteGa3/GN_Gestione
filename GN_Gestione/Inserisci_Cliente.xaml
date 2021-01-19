@@ -5,13 +5,15 @@
              
                          x:Class="GN_Gestione.Inserisci_Cliente"
                          Title="Inserisci Nuovo Cliente">
+        
 
         <StackLayout Padding="25">
             <!-- Place new controls here -->
 
-            <Grid HorizontalOptions="FillAndExpand">
+            <Grid > <!--HorizontalOptions="FillAndExpand"-->
 
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -19,49 +21,53 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
                 </Grid.RowDefinitions>
 
 
                 <Entry Placeholder="Nome"
-
-                           x:Name="nome"
-                           IsSpellCheckEnabled="false"
-                           IsTextPredictionEnabled="false"
-                           Grid.Column="0"
-                           Grid.Row="3"
-                           HeightRequest="130"
-                           FontSize="80"
-                       />
+                       x:Name="nome"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       HeightRequest="130"
+                       FontSize="50"/>
 
 
                 <Entry Placeholder="Soprannome"
-                           x:Name="soprannome"
-                           IsSpellCheckEnabled="false"
-                           IsTextPredictionEnabled="false"
-                           Grid.Column="1"
-                           Grid.Row="3"
-                           HeightRequest="130"
-                           FontSize="80"/>
+                       x:Name="soprannome"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       HeightRequest="130"
+                       FontSize="50"/>
 
 
-             <!--   <Entry Placeholder="Codice"
-                           x:Name="codice"
-                           IsSpellCheckEnabled="false"
-                           IsTextPredictionEnabled="false"
-                           Grid.Column="2"
-                           Grid.Row="3"
-                           HeightRequest="130"
-                           FontSize="80"/> -->
+                <Entry Placeholder="Commento"
+                       x:Name="commento"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       HeightRequest="130"
+                       FontSize="50"/>
+
+        <!--    <Entry Placeholder="Codice"
+                       x:Name="codice"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Column="2"
+                       Grid.Row="3"
+                       HeightRequest="130"
+                       FontSize="50"/> -->
 
                 <Button Text="Salva"
                            x:Name="salva"
                            FontSize="50"
                            HeightRequest="100"
                            Grid.Column="3"
-                           Grid.Row="3"
+                           Grid.Row="2"
                            Clicked="GoToAggiungiCliente"/>
 
             </Grid>

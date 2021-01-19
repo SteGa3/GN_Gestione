@@ -79,10 +79,9 @@ namespace GN_Gestione
             var customer = (Cliente_Retail)button.CommandParameter;
             if (customer == null) return;
             await Navigation.PushAsync(new ModificaCliente(customer));
-
         }
 
-       private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             PrintList = GetLista();
             int z = PrintList.Count;

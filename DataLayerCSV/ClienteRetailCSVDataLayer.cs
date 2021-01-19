@@ -216,7 +216,8 @@ namespace DataLayerCSV
 
             //delete customer from list
            
-            var itemToRemove = CustomersList.Single(r => r.Cl_Ret_CODE ==cliente.Cl_Ret_CODE );
+            var itemToRemove = CustomersList.Single(r => r.Cl_Ret_CODE == cliente.Cl_Ret_CODE );
+            CustomersList.Remove(itemToRemove);
 
             //check if inserted
             List<Cliente_Retail> results = CustomersList.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
@@ -266,7 +267,7 @@ namespace DataLayerCSV
         }
 
 
-        enum DelResultsCodes
+        public enum DelResultsCodes
         {
             ElementNotFound= 0,
             ListElementNotDeleted = 1,
@@ -276,7 +277,7 @@ namespace DataLayerCSV
         }
 
 
-        enum InsResultsCodes
+        public enum InsResultsCodes
         {   
             ErrorIns = 0,
             NotCreatedAfterIns = 1,
