@@ -98,11 +98,11 @@
                                            FontAttributes="Bold" />
 
                         <Label Grid.Column="4"
-                                           Text="{Binding Cl_Ret_Act}" FontSize="28"
+                                           Text="{Binding Cl_Ret_Tot}" FontSize="28"
                                            FontAttributes="Bold" />
 
                         <Label Grid.Column="5"
-                                           Text="{Binding Cl_Ret_Tot}" FontSize="28"
+                                           Text="{Binding Cl_Ret_Act}" FontSize="28"
                                            IsVisible="{Binding IsDisplay}"
                                            FontAttributes="Bold" />
 

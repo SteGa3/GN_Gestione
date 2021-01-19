@@ -64,6 +64,18 @@
                             HeightRequest="50"
                             WidthRequest="120"/>
 
+                    <Button Text="VENDITA"
+                            x:Name="vendita"
+                            Clicked="GoToAddRetailCustomer"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="3"
+                           
+                            BackgroundColor="Purple"
+                            TextColor="White"
+                            HeightRequest="50"
+                            WidthRequest="120"/>
+
                     <Label  x:Name="StatoFile"
                             Margin="80"
                             FontSize="25"
@@ -74,6 +86,9 @@
                             TextColor="Black"
                             HeightRequest="50"
                             WidthRequest="120"/>
+
+                    
+                    
                           
                   
                     

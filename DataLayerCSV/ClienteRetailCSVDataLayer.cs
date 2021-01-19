@@ -165,8 +165,6 @@ namespace DataLayerCSV
 
 
             //Write on string List
-                
-
             foreach (Cliente_Retail c in SortedList)
             {
                 line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
@@ -211,11 +209,7 @@ namespace DataLayerCSV
             var headersInsert = string.Join(";", headersList);
             values.Add(headersInsert);
 
-
-
-
-            //delete customer from list
-           
+            //delete customer from list           
             var itemToRemove = CustomersList.Single(r => r.Cl_Ret_CODE == cliente.Cl_Ret_CODE );
             CustomersList.Remove(itemToRemove);
 
@@ -230,8 +224,6 @@ namespace DataLayerCSV
 
 
             //Write on string List
-
-
             foreach (Cliente_Retail c in CustomersList)
             {
                 line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
@@ -240,7 +232,6 @@ namespace DataLayerCSV
                        Convert.ToString(c.Cl_Ret_Tot) + ";" +
                        Convert.ToString(c.Cl_Ret_Act) + ";" +
                        Convert.ToString(c.Cl_Ret_Comment);
-                //Convert.ToString(c.Cl_Ret_Comment);
 
                 values.Add(line);
             }
@@ -258,6 +249,7 @@ namespace DataLayerCSV
             return checkInsLista;
         }
 
+
         public int GetId(List<Cliente_Retail> ListaClienti)
         {
             int idresult;
@@ -266,7 +258,7 @@ namespace DataLayerCSV
             return idresult+1;
         }
 
-
+        //Errors enum
         public enum DelResultsCodes
         {
             ElementNotFound= 0,

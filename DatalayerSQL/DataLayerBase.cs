@@ -9,7 +9,7 @@ namespace DatalayerSQL
             {
                 get
                 {
-                return "server=sql7.freesqldatabase.com;user=sql7348745;pwd=zwpXVTKKK3;database=sql7348745;port=3306";
+                return "server=;user=;pwd=;database=;port=";
 
             }
         }

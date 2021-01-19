@@ -67,7 +67,12 @@ namespace GN_Gestione
         private void DeleteCommentEntry(object sender, EventArgs e)
         {
             delComment = true;
-            
+            if (sender is Button button)
+            {
+                button.IsEnabled = false;
+
+            }
+
         }
 
 
