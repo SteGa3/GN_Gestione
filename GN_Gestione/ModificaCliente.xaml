@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:local="clr-namespace:GN_Gestione"
+                     mc:Ignorable="d"
+                     x:Class="GN_Gestione.ModificaCliente">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+
+        <ListView  Grid.Row="0"
+                   x:Name="ClienteModView"
+                   ItemsSource="{Binding ClientiCollection}"
+                   HasUnevenRows="True">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1"
+                                           Text="{Binding Cl_Ret_CODE}" FontSize="28"
+                                           IsEnabled="False"
+                                           FontAttributes="Bold" />
+
+                            <Label Grid.Column="2"
+                                       Text="{Binding Cl_Ret_Name}" FontSize="28"
+                                       IsEnabled="False"
+                                       FontAttributes="Bold" />
+
+                            <Label Grid.Column="3"
+                                       Text="{Binding Cl_Ret_Nickname}" FontSize="28"
+                                       IsEnabled="False"
+                                       FontAttributes="Bold" />
+
+                            <Label Grid.Column="4"
+                                       Text="{Binding Cl_Ret_Tot}" FontSize="28"
+                                       IsEnabled="False"
+                                       FontAttributes="Bold" />
+
+                            <Label Grid.Column="5"
+                                       Text="{Binding Cl_Ret_Act}" FontSize="28"
+                                       IsEnabled="False"
+                                       FontAttributes="Bold" />
+
+                            <Label Grid.Column="6"
+                                       Text="{Binding Cl_Ret_Comment}" FontSize="28"
+                                       IsEnabled="False"
+                                       FontAttributes="Bold" />
+
+
+
+
+
+                        </Grid>
+
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <StackLayout Padding="10"
+                     Grid.Row="1">
+
+            <!-- Place new controls here -->
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+
+
+
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+
+                <!--Elements Delete-->
+                <Button Text="Cancella Commento"
+                        x:Name="cancellacommento"
+                        FontSize="16"
+                        Grid.Row="0"
+                        Grid.Column="4"
+                        BackgroundColor="Aquamarine"
+                        Clicked="DeleteCommentEntry"/>
+
+                <!--ENTRY-->
+                <Entry Placeholder="Nome"
+                       x:Name="nome"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Row="1" 
+                       Grid.Column="0"    
+                       FontSize="28"/>
+
+                <Entry Placeholder="Soprannome"
+                       x:Name="soprannome"
+                       IsSpellCheckEnabled="false"
+                       IsTextPredictionEnabled="false"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       FontSize="28"/>
+
+                <Entry Placeholder="Totale"
+                           x:Name="totale"
+                           IsSpellCheckEnabled="false"
+                           IsTextPredictionEnabled="false"
+                       Grid.Row="1"
+                           Grid.Column="2"
+                           FontSize="28"/>
+
+
+                <Entry Placeholder="Attuale"
+                           x:Name="attuale"
+                           IsSpellCheckEnabled="false"
+                           IsTextPredictionEnabled="false"
+                           Grid.Column="3"
+                       Grid.Row="1"
+                           FontSize="28"/>
+
+                <Entry Placeholder="Commento"
+                           x:Name="commento"
+                           IsSpellCheckEnabled="false"
+                           IsTextPredictionEnabled="false"
+                           Grid.Column="4"
+                           Grid.Row="1"
+                           
+                           FontSize="28"/>
+
+
+                <!--   <Entry Placeholder="Codice"
+                           x:Name="codice"
+                           IsSpellCheckEnabled="false"
+                           IsTextPredictionEnabled="false"
+                           Grid.Column="2"
+                           Grid.Row="3"
+                           HeightRequest="130"
+                           FontSize="80"/> -->
+
+                 
+                <!--Element Commands-->                
+                 <Button Text="Salva"
+                         x:Name="salva"
+                         FontSize="28"
+                         Grid.Row="3"
+                         Grid.Column="2"
+                         Clicked="GoToAggiungiCliente"/>
+
+                 <Button Text="Elimina"
+                         x:Name="elimina"
+                         FontSize="28"
+                         Grid.Column="4"
+                         Grid.Row="3"
+                         Clicked="GoToDeleteCliente"/>
+
+            </Grid>
+
+        </StackLayout>
+
+
+
+    </Grid>
+</ContentPage>

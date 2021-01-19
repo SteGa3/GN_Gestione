@@ -29,12 +29,15 @@ namespace GN_Gestione
         
         public ObservableCollection<Cliente_Retail> ClientiCollection { get; set; }
         Cliente_Retail cl = new Cliente_Retail();
-  
+        bool delComment;
+
+
 
         public ModificaCliente(Cliente_Retail cliente)
         {
             InitializeComponent();
             cl = cliente;
+            
 
             
 
@@ -61,6 +64,22 @@ namespace GN_Gestione
         }
 
 
+        private void DeleteCommentEntry(object sender, EventArgs e)
+        {
+            delComment = true;
+            
+        }
+
+
+        private async void GoToDeleteCliente (object sender, EventArgs e)
+        {
+            ClienteRetailCSVDataLayer clienteRetailCSVDataLayer = new ClienteRetailCSVDataLayer();
+            clienteRetailCSVDataLayer.DeleteRetailCSV(cl);
+
+            await Navigation.PushAsync(new MainPage());
+        }
+
+
         private async void GoToAggiungiCliente(object sender, EventArgs e)
         {
             Cliente_Retail cliente_Retail = new Cliente_Retail();
@@ -76,11 +95,12 @@ namespace GN_Gestione
             if (attuale.Text == null) { cliente_Retail.Cl_Ret_Act = cl.Cl_Ret_Act; }
             else { cliente_Retail.Cl_Ret_Act = Convert.ToInt32(attuale.Text); }
 
-            if (totale.Text == null) { cliente_Retail.Cl_Ret_Tot = cl.Cl_Ret_Tot; }
+            if (totale.Text == null) { cliente_Retail.Cl_Ret_Tot = cl.Cl_Ret_Tot; }          
             else { cliente_Retail.Cl_Ret_Tot = Convert.ToInt32(totale.Text); }
 
 
-            if (commento.Text == null) { cliente_Retail.Cl_Ret_Comment = cl.Cl_Ret_Comment; }
+            if (delComment == true) { cliente_Retail.Cl_Ret_Comment = ""; }
+            else if (commento.Text == null) { cliente_Retail.Cl_Ret_Comment = cl.Cl_Ret_Comment; }            
             else { cliente_Retail.Cl_Ret_Comment = commento.Text; }
             
 
