@@ -84,7 +84,7 @@ namespace GN_Gestione
         {
 
             var selectedCustomer = obj.SelectedItem as Cliente_Retail;
-            int index = selectedCustomer.Cl_Ret_CODE;
+            int index = selectedCustomer.code;
             //await Navigation.PushAsync(new Page2(selectedInstructor.Id));
             await Navigation.PushAsync(new ModificaCliente(index));
 

@@ -9,7 +9,7 @@ namespace Entities
     public class Cliente_Retail
     {
         public int Cl_Ret_IDdb { get; set; }
-        public int Cl_Ret_CODE { get; set; }
+        public int Cl_Ret_Code { get; set; }
         public string Cl_Ret_Name { get; set; }
         public string Cl_Ret_Surname { get; set; }
         public string Cl_Ret_Nickname { get; set; }

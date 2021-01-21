@@ -12,6 +12,7 @@ namespace DataLayerCSV
 {
     public class ClienteRetailCSVDataLayer : IClienteRetailCSVDatalayer
     {
+        
 
         public List<Cliente_Retail> GetAllRetail()
         {
@@ -44,7 +45,7 @@ namespace DataLayerCSV
 
                     Cliente_Retail SingleRetail = new Cliente_Retail();
 
-                    SingleRetail.Cl_Ret_CODE = Convert.ToInt32(values[0]);
+                    SingleRetail.Cl_Ret_Code = Convert.ToInt32(values[0]);
                     SingleRetail.Cl_Ret_Name = values[1];
                     SingleRetail.Cl_Ret_Nickname = values[2];
 
@@ -121,7 +122,7 @@ namespace DataLayerCSV
             values.Add(headersInsert);
 
             //check if element already exists
-            bool containsItem = ListToSort.Any(item => item.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+            bool containsItem = ListToSort.Any(item => item.Cl_Ret_Code == cliente.Cl_Ret_Code);
 
             List<Cliente_Retail> SortedList = new List<Cliente_Retail>();
 
@@ -129,19 +130,19 @@ namespace DataLayerCSV
             {
                 //check available id
                 ClToAdd = cliente;
-                ClToAdd.Cl_Ret_CODE = GetId(ListToSort);
-                idSave = ClToAdd.Cl_Ret_CODE;
+                ClToAdd.Cl_Ret_Code = GetId(ListToSort);
+                idSave = ClToAdd.Cl_Ret_Code;
                
             }
 
             else
             {
-                List<Cliente_Retail> check = ListToSort.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+                List<Cliente_Retail> check = ListToSort.FindAll(x => x.Cl_Ret_Code == cliente.Cl_Ret_Code);
                 oldElement = check[0];
-                idSave = check[0].Cl_Ret_CODE;
-                var itemToRemove = ListToSort.Single(r => r.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+                idSave = check[0].Cl_Ret_Code;
+                var itemToRemove = ListToSort.Single(r => r.Cl_Ret_Code == cliente.Cl_Ret_Code);
                 ListToSort.Remove(itemToRemove);
-                ClToAdd.Cl_Ret_CODE = oldElement.Cl_Ret_CODE; //
+                ClToAdd.Cl_Ret_Code = oldElement.Cl_Ret_Code; //
                 ClToAdd.Cl_Ret_Name = cliente.Cl_Ret_Name;
                 ClToAdd.Cl_Ret_Nickname = cliente.Cl_Ret_Nickname;
                 ClToAdd.Cl_Ret_Tot = oldElement.Cl_Ret_Tot; //
@@ -154,7 +155,7 @@ namespace DataLayerCSV
             SortedList = ListToSort.OrderBy(o => o.Cl_Ret_Name).ToList();
 
              //check if inserted in list
-            List<Cliente_Retail> results = SortedList.FindAll(x => x.Cl_Ret_CODE == idSave);
+            List<Cliente_Retail> results = SortedList.FindAll(x => x.Cl_Ret_Code == idSave);
             if (results.Count == 0)
             {
                 checkInsLista = (int)InsResultsCodes.NotCreatedAfterIns;
@@ -167,7 +168,7 @@ namespace DataLayerCSV
             //Write on string List
             foreach (Cliente_Retail c in SortedList)
             {
-                line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
+                line = Convert.ToString(c.Cl_Ret_Code) + ";" +
                        Convert.ToString(c.Cl_Ret_Name) + ";" +
                        Convert.ToString(c.Cl_Ret_Nickname) + ";" +
                        Convert.ToString(c.Cl_Ret_Tot) + ";" +
@@ -210,11 +211,11 @@ namespace DataLayerCSV
             values.Add(headersInsert);
 
             //delete customer from list           
-            var itemToRemove = CustomersList.Single(r => r.Cl_Ret_CODE == cliente.Cl_Ret_CODE );
+            var itemToRemove = CustomersList.Single(r => r.Cl_Ret_Code == cliente.Cl_Ret_Code);
             CustomersList.Remove(itemToRemove);
 
             //check if inserted
-            List<Cliente_Retail> results = CustomersList.FindAll(x => x.Cl_Ret_CODE == cliente.Cl_Ret_CODE);
+            List<Cliente_Retail> results = CustomersList.FindAll(x => x.Cl_Ret_Code == cliente.Cl_Ret_Code);
             if (results.Count > 0)
             {
                 checkInsLista = (int)DelResultsCodes.ListElementNotDeleted;
@@ -226,7 +227,7 @@ namespace DataLayerCSV
             //Write on string List
             foreach (Cliente_Retail c in CustomersList)
             {
-                line = Convert.ToString(c.Cl_Ret_CODE) + ";" +
+                line = Convert.ToString(c.Cl_Ret_Code) + ";" +
                        Convert.ToString(c.Cl_Ret_Name) + ";" +
                        Convert.ToString(c.Cl_Ret_Nickname) + ";" +
                        Convert.ToString(c.Cl_Ret_Tot) + ";" +
@@ -253,7 +254,7 @@ namespace DataLayerCSV
         public int GetId(List<Cliente_Retail> ListaClienti)
         {
             int idresult;
-            var highercode = ListaClienti.Max(r => r.Cl_Ret_CODE);
+            var highercode = ListaClienti.Max(r => r.Cl_Ret_Code);
             idresult = Convert.ToInt32(highercode);
             return idresult+1;
         }

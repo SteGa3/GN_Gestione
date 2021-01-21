@@ -89,7 +89,7 @@ namespace GN_Gestione
         {
             Cliente_Retail cliente_Retail = new Cliente_Retail();
 
-            cliente_Retail.Cl_Ret_CODE = cl.Cl_Ret_CODE;
+            cliente_Retail.Cl_Ret_Code = cl.Cl_Ret_Code;
 
             if (nome.Text == null) { cliente_Retail.Cl_Ret_Name = cl.Cl_Ret_Name; }
             else {cliente_Retail.Cl_Ret_Name = nome.Text; }

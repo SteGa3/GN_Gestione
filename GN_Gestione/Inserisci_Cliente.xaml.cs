@@ -29,7 +29,7 @@ namespace GN_Gestione
             Cliente_Retail cli = new Cliente_Retail();
             cli.Cl_Ret_Name = nome.Text;
             cli.Cl_Ret_Nickname = soprannome.Text;
-            cli.Cl_Ret_CODE = 0;
+            cli.Cl_Ret_Code = 0;
             cli.Cl_Ret_Act = 0;
             cli.Cl_Ret_Tot = 0;
             cli.Cl_Ret_Comment = commento.Text;

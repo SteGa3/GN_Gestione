@@ -3,12 +3,12 @@ namespace Entities
 {
     public class Bag
     {
-        public int codiceInf { get; private set; }
+        public int infID { get; private set; }
         public string nomeInf { get; private set; }
 
-        public string codiceBag { get; private set; }
+        
         public int grammi { get; private set; }
-        public double PrezzoRetail { get; set; }
+        public double prezzoRetail { get; set; }
 
         public double costoBag { get; set; }
         public double costoSticker { get; set; }
@@ -16,6 +16,12 @@ namespace Entities
         private static double vat = 1.22;
         
         
+
+        public string codiceBag()
+        {
+            var codice = infID + "-" + grammi.ToString();
+            return codice;
+        }
 
         public double costoBagTotale()
         {
@@ -38,7 +44,7 @@ namespace Entities
 
         public double PrezzoNetto()
         {
-            double netVat = PrezzoRetail/vat;
+            double netVat = prezzoRetail/vat;
             return netVat;
         }
 
@@ -47,9 +53,10 @@ namespace Entities
 
         public Bag(int CodiceInf, string NomeInf, int Grammi, double PrezzoRetail )
         {
-            codiceInf = CodiceInf;
+            infID = CodiceInf;
             nomeInf = NomeInf;
-
+            grammi = Grammi;
+            prezzoRetail = PrezzoRetail;
         }
     }
 }

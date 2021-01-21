@@ -83,7 +83,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="1"
-                                           Text="{Binding Cl_Ret_CODE}" FontSize="28"
+                                           Text="{Binding Cl_Ret_Code}" FontSize="28"
                                            IsVisible="{Binding IsDisplay}"
                                            FontAttributes="Bold" />
 

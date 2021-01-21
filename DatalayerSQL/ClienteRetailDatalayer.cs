@@ -33,7 +33,7 @@ namespace DataLayerSQL
                     
                     command.Parameters.AddWithValue("?Nome", cliente.Cl_Ret_Name);
                     command.Parameters.AddWithValue("?Nickname", cliente.Cl_Ret_Nickname);
-                    command.Parameters.AddWithValue("?ID_Cliente_Retail", cliente.Cl_Ret_CODE);
+                    command.Parameters.AddWithValue("?ID_Cliente_Retail", cliente.Cl_Ret_Code);
 
                     command.ExecuteNonQuery();
 
