@@ -10,7 +10,7 @@ using System.Linq;
 namespace DataLayerCSV
 
 {
-    public class ClienteRetailCSVDataLayer : IClienteRetailCSVDatalayer
+    public class ClienteRetailCSVDataLayer: DatalayerCSVBase, IClienteRetailCSVDatalayer
     {
         
 
@@ -21,10 +21,10 @@ namespace DataLayerCSV
 
             //Read resource's csv file as StreamReader
             FileManager.DeviceIO fileManager = new FileManager.DeviceIO();
-            StreamReader reader = fileManager.FileRead(resourceName);
+            StreamReader reader = fileManager.FileRead(resourceName); //
 
             //Populating List with Customers
-            if (reader == null || reader.EndOfStream)
+            if (reader == null || reader.EndOfStream) //
             {
                 Cliente_Retail error = new Cliente_Retail();
                 error.Cl_Ret_Name = "Errore Lettura Stream";
@@ -32,39 +32,35 @@ namespace DataLayerCSV
                 All.Add(error);
                 return All;
             }
+
+            List<string[]> v = GetCSVBody(reader);
             
-            using (reader)
+            foreach (var values in v)
             {
-                reader.ReadLine(); //skip headers
+                //string[] values = s.Split(";"); //csv format
 
-                while (!reader.EndOfStream)
-                {
-                    //Read lines of the stream
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(";"); //csv format
+                Cliente_Retail SingleRetail = new Cliente_Retail();
 
-                    Cliente_Retail SingleRetail = new Cliente_Retail();
+                SingleRetail.Cl_Ret_Code = Convert.ToInt32(values[0]);
+                SingleRetail.Cl_Ret_Name = values[1];
+                SingleRetail.Cl_Ret_Nickname = values[2];
 
-                    SingleRetail.Cl_Ret_Code = Convert.ToInt32(values[0]);
-                    SingleRetail.Cl_Ret_Name = values[1];
-                    SingleRetail.Cl_Ret_Nickname = values[2];
+                if (values[3] == "") { SingleRetail.Cl_Ret_Act = 0; }
+                else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[3]); }
 
-                    if (values[3] == "") { SingleRetail.Cl_Ret_Act = 0; }
-                    else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[3]); }
+                if (values[4] == "") { SingleRetail.Cl_Ret_Tot = 0; }
+                else { SingleRetail.Cl_Ret_Tot = Convert.ToInt32(values[4]); }
 
-                    if (values[4] == "") { SingleRetail.Cl_Ret_Tot = 0; }
-                    else { SingleRetail.Cl_Ret_Tot = Convert.ToInt32(values[4]); }
+                SingleRetail.Cl_Ret_Comment = values[5];
 
-                    SingleRetail.Cl_Ret_Comment = values[5];
 
-                    All.Add(SingleRetail);
-                }
-
-                return All;
+                All.Add(SingleRetail);
             }
 
+            return All;
         } 
                 
+
         public List<String> GetAllHeaders()
         {
             //Read resource's csv file
@@ -77,27 +73,25 @@ namespace DataLayerCSV
 
             if (reader == null || reader.EndOfStream is true)
             {
-               
                 string error = "Errore Lettura Stream";
 
                 headers.Add(error);
                 return headers;
             }
-            
-            using (reader)
-            {
-                //Read lines of the stream
-                string line = reader.ReadLine();
-                string[] values = line.Split(";");
-                
-                foreach (string str in values)
-                {
-                    headers.Add(str);
-                }
-                return headers;
-            }
-        }
 
+
+            var values = GetCSVHeaders(reader);
+
+            foreach (string str in values)
+            {
+
+                headers.Add(str);
+
+            }
+
+            return headers;
+        }
+        
         public int InsRetailCSV(Cliente_Retail cliente)
         {
             var resourceName = "ListaClienti.csv";
@@ -249,7 +243,6 @@ namespace DataLayerCSV
 
             return checkInsLista;
         }
-
 
         public int GetId(List<Cliente_Retail> ListaClienti)
         {
