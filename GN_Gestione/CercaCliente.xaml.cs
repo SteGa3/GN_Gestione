@@ -35,15 +35,15 @@ namespace GN_Gestione
             PrintHeaders = GetHeaders();
 
             HeadersCollection.Clear();
-            List<string> ercazzo = new List<string>();
+            List<string> output = new List<string>();
 
 
             foreach (string str in PrintHeaders)
             {
-                ercazzo.Add(str);
+                output.Add(str);
             }
 
-            HeadersCollection.Add(ercazzo);
+            HeadersCollection.Add(output);
 
 
             HeadersView.ItemsSource = HeadersCollection;
@@ -112,7 +112,9 @@ namespace GN_Gestione
 
             else
             {
-                ClientiView.ItemsSource = ClientiCollection.Where(x => x.Cl_Ret_Name.StartsWith(e.NewTextValue));
+                var lowerKeyword = e.NewTextValue.ToLower();
+                ClientiView.ItemsSource = ClientiCollection
+                    .Where(r => r.Cl_Ret_Name.ToLower().Contains(lowerKeyword)).ToList();
             }
         }
 
