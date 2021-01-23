@@ -18,36 +18,14 @@ namespace GN_Gestione
         private static readonly string settingsFolder = "settings";
         private static readonly string settingsName = "mainsettings.csv";
         private static readonly string devicePath = rootFolder.Path.ToString();
-        private string settingsPath = devicePath + "/" + settingsFolder + "/" + settingsName;
+        private static readonly string settingsPath = settingsFolder + "/" + settingsName;
+        private string fullPath = devicePath + "/" + settingsFolder + "/" + settingsName;
         
-       
-        
-        
-        
-
-
-        //file path
-        //Check if file exists
-        //Write settings on object
-
         public App()
         {
             InitializeComponent();
+            SettingsCheck();
 
-            var c = fileManager.FileExists(settingsPath);
-            if (!c)
-            {
-                fileManager.CreateFolder(settingsFolder);
-                fileManager.CreateFile(settingsFolder + "/" + settingsName);
-                //new NavigationPage(new Impostazioni());
-            }
-
-            MainPage = new NavigationPage(new MainPage());
-            
-            
-            
-
-                                           
         }
 
         protected override void OnStart()
@@ -70,6 +48,24 @@ namespace GN_Gestione
         {
             DeviceIO device = new DeviceIO();
             return device.FileExists(_path);
+        }
+
+        private void SettingsCheck()
+        {
+            var c = fileManager.FileExists(settingsPath);
+
+            if (!c)
+            {
+                fileManager.CreateFolder(settingsFolder);
+                fileManager.CreateFile(settingsFolder + "/" + settingsName);
+                MainPage = new NavigationPage(new Impostazioni());
+            }
+
+            else
+            { 
+                //carica appSettings da file csv
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
     }
 }
