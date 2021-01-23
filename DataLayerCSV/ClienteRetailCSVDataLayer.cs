@@ -33,7 +33,8 @@ namespace DataLayerCSV
                 return All;
             }
 
-            List<string[]> v = GetCSVBody(reader);
+           
+            List<string[]> v = GetCSVBody(reader, ";");
             
             foreach (var values in v)
             {
@@ -80,7 +81,7 @@ namespace DataLayerCSV
             }
 
 
-            var values = GetCSVHeaders(reader);
+            var values = GetCSVHeaders(reader,";");
 
             foreach (string str in values)
             {
@@ -139,7 +140,7 @@ namespace DataLayerCSV
                 ClToAdd.Cl_Ret_Code = oldElement.Cl_Ret_Code; //
                 ClToAdd.Cl_Ret_Name = cliente.Cl_Ret_Name;
                 ClToAdd.Cl_Ret_Nickname = cliente.Cl_Ret_Nickname;
-                ClToAdd.Cl_Ret_Tot = oldElement.Cl_Ret_Tot; //
+                ClToAdd.Cl_Ret_Tot = cliente.Cl_Ret_Tot; //
                 ClToAdd.Cl_Ret_Act = cliente.Cl_Ret_Act;
                 ClToAdd.Cl_Ret_Comment = cliente.Cl_Ret_Comment;
             }
