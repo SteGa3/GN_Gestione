@@ -76,6 +76,19 @@
                             HeightRequest="50"
                             WidthRequest="120"/>
 
+
+                    <Button Text="IMPOSTAZIONI"
+                            x:Name="impostazioni"
+                            Clicked="GoToSettings"
+                            FontSize="25"
+                            Grid.Column="1"
+                            Grid.Row="3"
+                           
+                            BackgroundColor="Purple"
+                            TextColor="White"
+                            HeightRequest="50"
+                            WidthRequest="120"/>
+
                     <Label  x:Name="StatoFile"
                             Margin="80"
                             FontSize="25"

@@ -42,7 +42,15 @@ namespace GN_Gestione
             if (isExt == true)
             {
                 MyProperty = "caricato correttamente";
+
+                /*ICommand deleteFileCommand;
+                Button buttonDelete = new Button { Text = "Cancella File" };
+                deleteFileCommand = new Command(deleteCommand);
+                buttonDelete.BindingContext = deleteFileCommand;
+                buttonDelete.Clicked += Delete_Clicked;
+                Layout.Children.Add(buttonDelete);*/
             }
+
             else
             {
 
@@ -56,36 +64,13 @@ namespace GN_Gestione
                 buttonCreate.Clicked += Create_Clicked;
                 Layout.Children.Add(buttonCreate);
 
-                ICommand deleteFileCommand;
-                Button buttonDelete = new Button { Text = "Cancella File" };
-                deleteFileCommand = new Command(deleteCommand);
-                buttonDelete.BindingContext = deleteFileCommand;
-                buttonDelete.Clicked += Delete_Clicked;
-                Layout.Children.Add(buttonDelete);
-
-
-
-
-
-
-
                 bool checkCreation = DataManagement.FileExists(FileName);
                 if (checkCreation == true)
                 {
-                    MyProperty = "File Creato.";
+                    MyProperty = "Esistente";
                 }
+
                 else { MyProperty = "Errore, File non Creato!"; }
-                /*
-
-                // Creating a binding
-                newButton.SetBinding(Button.CommandProperty, new Binding("ViewModelProperty"));
-
-                // Set the binding context after SetBinding method calls for performance reasons
-                newButton.BindingContext = Layout;
-
-                // Set StackLayout in XAML to the class field
-                parent = Layout; */
-
             }
 
             
@@ -120,6 +105,7 @@ namespace GN_Gestione
 
         private void deleteCommand()
         {
+            DataManagement.DeleteFile(FileName);
 
         }
 
@@ -141,6 +127,12 @@ namespace GN_Gestione
         private async void GoToAddRetailCustomer(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Inserisci_Cliente());
+
+        }
+
+        private async void GoToSettings(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Impostazioni());
 
         }
 
