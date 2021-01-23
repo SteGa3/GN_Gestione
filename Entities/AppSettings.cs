@@ -8,8 +8,10 @@ namespace Entities
 
     public class AppSettings
     {
-        public int CRetailIndex { get; set; }
-        public string FileName { get; set; }
+        public bool isFile { get; set; }
+        public bool isDb { get; set; }
+
+
         public string DbUser { get; set; }
         public string DbPass { get; set; }
 
@@ -18,7 +20,11 @@ namespace Entities
 
         public enum FileType { noFile = 0, csv = 1, json = 2 }
 
-        public enum DbType { MySql = 0, MsSql = 0, MongoDb = 2};
+        public enum DbType { noDb = 0, MySql = 1, MsSql = 2, MongoDb = 3 };
+
+        public AppSettings()
+        {
+        }
 
 
 
