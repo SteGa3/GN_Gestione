@@ -35,7 +35,6 @@ namespace GN_Gestione
             InitializeComponent();
 
             var c = fileManager.FileExists(settingsPath);
-            fileManager.DeleteFolder("/data");
             if (!c)
             {
                 fileManager.CreateFolder(settingsFolder);
