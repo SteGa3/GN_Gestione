@@ -12,7 +12,7 @@ namespace DataLayerCSV
     public class DatalayerCSVBase
     {
 
-        internal List<string[]> GetCSVBody(StreamReader streamReader)
+        internal List<string[]> GetCSVBody(StreamReader streamReader, string separator)
         {
             List<string[]> results = new List<string[]>();
             using (streamReader) //
@@ -23,8 +23,7 @@ namespace DataLayerCSV
                 {
                     //Read lines of the stream
                     string line = streamReader.ReadLine();
-                    //results.Add(line);
-                    string[] values = line.Split(";");
+                    string[] values = line.Split(separator);
                     results.Add(values);
 
                 }
@@ -34,17 +33,57 @@ namespace DataLayerCSV
         }
 
 
-        internal string[] GetCSVHeaders (StreamReader streamReader)
+        internal string[] GetCSVHeaders (StreamReader streamReader, string separator)
         {
             string line = streamReader.ReadLine();
-            string[] values = line.Split(";");
+            string[] values = line.Split(separator);
             return values;
         }
 
 
-        internal int GetCSVid(StreamReader streamReader)
+
+        internal bool DeleteItem (StreamReader streamReader, string separator, string[] item, int sortPosition)
         {
-            var toCheck = GetCSVBody(streamReader);
+            bool check= true;
+
+            List<string[]> results = new List<string[]>();
+            using (streamReader) //
+            {
+                streamReader.ReadLine(); //skip headers
+
+                while (!streamReader.EndOfStream)
+                {
+                    //Read lines of the stream
+                    string line = streamReader.ReadLine();
+                    string[] values = line.Split(separator);
+                    results.Add(values);
+
+                }
+
+            }
+
+            //cerca elemento
+            var itemToRemove = results.SingleOrDefault(r => r == item);
+            if (itemToRemove != null)
+            {
+                results.Remove(itemToRemove);
+                var sortedList = results.OrderBy(r => r[sortPosition]);
+                //var itemRemoved = results.SingleOrDefault(r => r == item);
+                
+
+
+            }
+
+
+
+            return check;          
+
+        }
+
+
+        internal int GetCSVNextId(StreamReader streamReader, string separator)
+        {
+            var toCheck = GetCSVBody(streamReader, separator);
             var highercode = toCheck.Max(r => Convert.ToInt32(r[0]));
             return highercode + 1;
         }
