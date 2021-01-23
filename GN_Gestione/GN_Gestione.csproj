@@ -23,5 +23,8 @@
     <Compile Update="CercaCliente.xaml.cs">
       <DependentUpon>CercaCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Impostazioni.xaml.cs">
+      <DependentUpon>Impostazioni.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
