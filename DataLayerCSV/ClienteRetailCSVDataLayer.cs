@@ -35,6 +35,8 @@ namespace DataLayerCSV
 
            
             List<string[]> v = GetCSVBody(reader, ";");
+
+            reader.Close();
             
             foreach (var values in v)
             {
@@ -46,11 +48,11 @@ namespace DataLayerCSV
                 SingleRetail.Cl_Ret_Name = values[1];
                 SingleRetail.Cl_Ret_Nickname = values[2];
 
-                if (values[3] == "") { SingleRetail.Cl_Ret_Act = 0; }
-                else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[3]); }
+                if (values[3] == "") { SingleRetail.Cl_Ret_Tot = 0; }
+                else { SingleRetail.Cl_Ret_Tot = Convert.ToInt32(values[3]); }
 
-                if (values[4] == "") { SingleRetail.Cl_Ret_Tot = 0; }
-                else { SingleRetail.Cl_Ret_Tot = Convert.ToInt32(values[4]); }
+                if (values[4] == "") { SingleRetail.Cl_Ret_Act = 0; }
+                else { SingleRetail.Cl_Ret_Act = Convert.ToInt32(values[4]); }
 
                 SingleRetail.Cl_Ret_Comment = values[5];
 
@@ -89,6 +91,8 @@ namespace DataLayerCSV
                 headers.Add(str);
 
             }
+
+            reader.Close();
 
             return headers;
         }
@@ -174,7 +178,7 @@ namespace DataLayerCSV
                 values.Add(line);
             }
 
-            String[] str = values.ToArray();
+            string[] str = values.ToArray();
             FileManager.DeviceIO fileManager = new FileManager.DeviceIO();
             var checkIO = fileManager.UpdateTextFile(resourceName,str);
             if (checkIO == true)

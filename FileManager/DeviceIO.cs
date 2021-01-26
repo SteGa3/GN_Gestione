@@ -73,6 +73,7 @@ namespace FileManager
                 var reader = new StreamReader(stream);
 
                 return reader;
+
             }
 
             else
@@ -150,7 +151,7 @@ namespace FileManager
 
             if (existResult)
             {
-                TextWriter tw = new StreamWriter(path);
+                TextWriter tw = new StreamWriter(path, false);
                 var lngt = stringList.Length;
 
                 if (stringList != null || lngt != 0)

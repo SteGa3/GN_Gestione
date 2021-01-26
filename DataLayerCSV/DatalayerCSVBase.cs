@@ -12,7 +12,7 @@ namespace DataLayerCSV
     public class DatalayerCSVBase
     {
 
-        internal List<string[]> GetCSVBody(StreamReader streamReader, string separator)
+        public List<string[]> GetCSVBody(StreamReader streamReader, string separator)
         {
             List<string[]> results = new List<string[]>();
             using (streamReader) //
@@ -33,7 +33,7 @@ namespace DataLayerCSV
         }
 
 
-        internal string[] GetCSVHeaders (StreamReader streamReader, string separator)
+        public string[] GetCSVHeaders (StreamReader streamReader, string separator)
         {
             string line = streamReader.ReadLine();
             string[] values = line.Split(separator);
@@ -42,7 +42,7 @@ namespace DataLayerCSV
 
 
 
-        internal bool DeleteItem (StreamReader streamReader, string separator, string[] item, int sortPosition)
+        public bool DeleteItem (StreamReader streamReader, string separator, string[] item, int sortPosition)
         {
             bool check= true;
 
@@ -81,7 +81,7 @@ namespace DataLayerCSV
         }
 
 
-        internal int GetCSVNextId(StreamReader streamReader, string separator)
+        public int GetCSVNextId(StreamReader streamReader, string separator)
         {
             var toCheck = GetCSVBody(streamReader, separator);
             var highercode = toCheck.Max(r => Convert.ToInt32(r[0]));
