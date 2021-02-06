@@ -114,7 +114,7 @@ namespace GN_Gestione
             {
                 var lowerKeyword = e.NewTextValue.ToLower();
                 ClientiView.ItemsSource = ClientiCollection
-                    .Where(r => r.Cl_Ret_Name.ToLower().Contains(lowerKeyword)).ToList();
+                    .Where(r => r.Cl_Ret_Name.ToLower().Contains(lowerKeyword) || r.Cl_Ret_Nickname.ToLower().Contains(lowerKeyword)).ToList();
             }
         }
 
